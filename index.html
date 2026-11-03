@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090f1d">
+<meta name="description" content="SENSI X ATUL - Gaming sensitivity preset manager">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<title>SENSI X ATUL</title>
+<style>
+:root{--bg:#080e1b;--panel:#111b2d;--panel2:#17243a;--line:#293953;--txt:#f4f7ff;--muted:#9aabc4;--blue:#51c8ff;--purple:#8b7cff;--green:#4de0a2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#15294a 0,#080e1b 48%);color:var(--txt);font-family:Inter,system-ui,Arial,sans-serif;min-height:100vh}
+header{position:sticky;top:0;z-index:5;background:#080e1beF;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px 16px}
+.head{max-width:1100px;margin:auto;display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px}.brand{font-weight:900;letter-spacing:1.5px;font-size:18px}.sub{color:var(--blue);font-size:10px;letter-spacing:2px;margin-top:3px}
+main{max-width:1100px;margin:auto;padding:18px 14px 50px}.hero{background:linear-gradient(125deg,#172b4b,#111a2b 65%,#25204a);border:1px solid #33496b;border-radius:20px;padding:20px;position:relative;overflow:hidden}.hero:after{content:"SX";position:absolute;right:15px;top:-24px;font-size:120px;font-weight:1000;color:#ffffff0b}.eyebrow{color:var(--blue);font-size:11px;letter-spacing:2px;font-weight:800}.hero h1{font-size:27px;margin:8px 0}.hero p{color:#b7c5da;max-width:620px;line-height:1.5;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}.stat,.panel,.gun{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:13px}.stat b{display:block;font-size:18px}.stat span{color:var(--muted);font-size:10px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:5px 0 13px}.tab{border:1px solid var(--line);background:#111b2d;color:#b9c7dc;border-radius:999px;padding:10px 14px;white-space:nowrap;font-weight:700;font-size:12px}.tab.active{background:#173b59;border-color:var(--blue);color:#fff}
+.layout{display:grid;grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr);gap:13px}.panel h2{font-size:16px;margin:0 0 12px}.muted{color:var(--muted);font-size:12px}.field{margin:12px 0}.field label{display:block;font-size:12px;color:#c6d2e4;margin-bottom:7px}.field select,.field input[type=text]{width:100%;background:#0b1424;color:white;border:1px solid #33445e;border-radius:10px;padding:12px;font-size:13px;outline:none}.field select:focus,.field input:focus{border-color:var(--blue)}
+.guns{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-height:360px;overflow:auto;padding-right:3px}.gun{padding:11px;text-align:left;color:white;cursor:pointer}.gun small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.gun.selected{border-color:var(--blue);background:#15304a}
+.values{display:grid;grid-template-columns:1fr 1fr;gap:9px}.value{background:#0b1424;border:1px solid #293953;border-radius:12px;padding:11px}.value label{display:block;font-size:11px;color:#b7c6dc}.value strong{font-size:20px;color:var(--blue);display:block;margin:5px 0}.value input{width:100%;accent-color:var(--blue)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.btn{border:0;border-radius:10px;padding:11px 14px;font-weight:800;font-size:12px;cursor:pointer;background:linear-gradient(100deg,#42c8ff,#8b7cff);color:#07111e}.btn.secondary{background:#202f47;color:#dce8f8;border:1px solid #3b506f}.btn:active{transform:scale(.98)}
+.note{border-left:3px solid #e7b85b;background:#30281766;padding:11px;border-radius:8px;color:#e9d9b7;font-size:11px;line-height:1.5;margin-top:13px}
+.saved{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:10px 0;font-size:12px}.saved:last-child{border:0}
+footer{text-align:center;color:#71839e;font-size:10px;line-height:1.6;padding:24px 12px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#e8f5ff;color:#081321;padding:11px 16px;border-radius:99px;font-size:12px;font-weight:800;display:none;z-index:10}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.hero h1{font-size:23px}.stats{gap:7px}.stat{padding:10px}.stat b{font-size:15px}.guns{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="head"><img class="logo" src="logo.svg" alt="SX logo"><div><div class="brand">SENSI X ATUL</div><div class="sub">ULTIMATE SENSITIVITY CENTER</div></div></div></header>
+<main>
+<section class="hero"><div class="eyebrow">GAMING PRESET MANAGER • 2026 EDITION</div><h1>Build Your Perfect Sensi.</h1><p>अपना डिवाइस और गन चुनें, शुरुआती sensitivity preset देखें, फिर अपने gameplay के अनुसार values adjust करके save करें।</p></section>
+<div class="stats"><div class="stat"><b id="gunCount">24</b><span>GUN PRESETS</span></div><div class="stat"><b>12</b><span>DEVICE BRANDS</span></div><div class="stat"><b id="savedCount">0</b><span>MY SAVED SETUPS</span></div></div>
+<nav class="tabs"><button class="tab active" data-tab="setup">Sensi Dashboard</button><button class="tab" data-tab="saved">My Setups</button><button class="tab" data-tab="about">About & Disclaimer</button></nav>
+<section id="setup">
+<div class="layout">
+<div class="panel">
+<h2>01 / Device Configuration</h2>
+<div class="field"><label for="brandSelect">Device Brand</label><select id="brandSelect"></select></div>
+<div class="field"><label for="modelInput">Device Model (optional)</label><input id="modelInput" type="text" placeholder="जैसे: Redmi Note 13 Pro"></div>
+<div class="field"><label for="styleSelect">Gameplay Style</label><select id="styleSelect"><option value="balanced">Balanced</option><option value="drag">Drag Headshot</option><option value="rush">Rush / Close Range</option><option value="sniper">Sniper / Long Range</option></select></div>
+<h2 style="margin-top:20px">02 / Select Your Gun</h2>
+<div class="field"><input id="gunSearch" type="text" placeholder="🔎 Search gun..." /></div>
+<div class="guns" id="gunList"></div>
+</div>
+<div class="panel">
+<h2>03 / Sensitivity Controls</h2>
+<div class="muted" id="selectedInfo">Selected: MP40 • Balanced</div>
+<div class="field"><label for="presetSelect">Preset Profile</label><select id="presetSelect"><option value="recommended">Device-based starter</option><option value="high">High sensitivity</option><option value="medium">Medium sensitivity</option><option value="low">Low sensitivity</option></select></div>
+<div class="values" id="valueControls"></div>
+<div class="actions"><button class="btn" id="saveBtn">＋ Save Setup</button><button class="btn secondary" id="copyBtn">Copy Values</button><button class="btn secondary" id="resetBtn">Reset Preset</button></div>
+<div class="note">ये community-style starting presets हैं, official या guaranteed headshot settings नहीं। गेम अपडेट, device performance, FPS, screen size, HUD और आपकी practice के अनुसार values बदल सकती हैं।</div>
+</div>
+</div>
+</section>
+<section id="saved" hidden><div class="panel"><h2>My Saved Setups</h2><div id="savedList" class="muted">अभी कोई setup save नहीं है।</div></div></section>
+<section id="about" hidden><div class="panel"><h2>About SENSI X ATUL</h2><p class="muted">SENSI X ATUL एक independent sensitivity preset manager है। यह किसी game publisher का official app नहीं है।</p><h2 style="margin-top:20px">Copyright & Trademark Disclaimer</h2><p class="muted">© 2026 SENSI X ATUL. All rights reserved. Free Fire और संबंधित नाम, लोगो तथा गेम assets उनके respective owners के trademarks/property हैं। यह ऐप fan-made, unofficial और unaffiliated है। इसमें कोई game file modification, cheat, hack या auto-aim feature नहीं है।</p><p class="muted">Sensitivity values केवल शुरुआती सुझाव हैं। किसी भी परिणाम की गारंटी नहीं दी जाती।</p></div></section>
+<footer>© 2026 SENSI X ATUL • Independent fan-made utility<br>Not affiliated with or endorsed by Garena.</footer>
+</main><div class="toast" id="toast"></div>
+<script>
+const guns=[
+["MP40","SMG"],["UMP","SMG"],["MP5","SMG"],["Thompson","SMG"],["Vector","SMG"],["P90","SMG"],["MAC10","SMG"],
+["M1887","Shotgun"],["M1014","Shotgun"],["MAG-7","Shotgun"],["SPAS12","Shotgun"],["Charge Buster","Shotgun"],
+["Desert Eagle","Pistol"],["M500","Pistol"],["G18","Pistol"],["USP","Pistol"],
+["SCAR","AR"],["AK","AR"],["M4A1","AR"],["XM8","AR"],["FAMAS","AR"],["Groza","AR"],["AN94","AR"],["AUG","AR"],
+["Woodpecker","Marksman"],["SVD","Marksman"],["AC80","Marksman"],["SKS","Marksman"],
+["AWM","Sniper"],["M82B","Sniper"],["Kar98k","Sniper"],["M24","Sniper"],
+["M60","LMG"],["M249","LMG"],["Gatling","LMG"],["Crossbow","Special"]
+];
+const brands=["Realme","Motorola","iPhone","Redmi","POCO","Samsung","Vivo","OPPO","OnePlus","iQOO","Infinix","Tecno","Other / Custom"];
+const keys=["General","Red Dot","2X Scope","4X Scope","Sniper Scope","Free Look"];
+const base={General:174,"Red Dot":166,"2X Scope":154,"4X Scope":142,"Sniper Scope":92,"Free Look":130};
+let selectedGun="MP40", current={}, saved=JSON.parse(localStorage.getItem("sx_saved")||"[]");
+const $=id=>document.getElementById(id);
+function toast(s){$("toast").textContent=s;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",1900)}
+function hash(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return Math.abs(h)}
+function generate(){
+ const brand=$("brandSelect").value, style=$("styleSelect").value, preset=$("presetSelect").value;
+ let device=brand+($("modelInput").value||""); let g=selectedGun;
+ let offset=(hash(device+g)%17)-8, gunOffset=(hash(g)%13)-6;
+ let styleOffset={balanced:0,drag:10,rush:7,sniper:-12}[style];
+ let presetOffset={recommended:0,high:12,medium:-5,low:-18}[preset];
+ current={};
+ keys.forEach((k,i)=>{let v=base[k]+offset+gunOffset+styleOffset+presetOffset-(i*2); if(g.includes("Shotgun")||g==="M1887"||g==="M1014"||g==="MAG-7"||g==="SPAS12")v+= (i===0?7:2); current[k]=Math.max(0,Math.min(200,v));});
+ renderValues();
+ $("selectedInfo").textContent=`Selected: ${g} • ${style[0].toUpperCase()+style.slice(1)} • ${brand}`;
+}
+function renderValues(){
+ $("valueControls").innerHTML=keys.map(k=>`<div class="value"><label>${k}</label><strong id="v_${k.replaceAll(" ","_")}">${current[k]}</strong><input aria-label="${k}" type="range" min="0" max="200" value="${current[k]}" data-key="${k}"></div>`).join("");
+ document.querySelectorAll("#valueControls input").forEach(el=>el.addEventListener("input",e=>{let k=e.target.dataset.key;current[k]=+e.target.value;$("v_"+k.replaceAll(" ","_")).textContent=e.target.value;}));
+}
+function renderGuns(filter=""){
+ $("gunList").innerHTML=guns.filter(g=>g[0].toLowerCase().includes(filter.toLowerCase())||g[1].toLowerCase().includes(filter.toLowerCase())).map(g=>`<button class="gun ${g[0]===selectedGun?"selected":""}" data-gun="${g[0]}"><b>${g[0]}</b><small>${g[1]}</small></button>`).join("");
+ document.querySelectorAll(".gun").forEach(b=>b.addEventListener("click",()=>{selectedGun=b.dataset.gun;renderGuns($("gunSearch").value);generate();}));
+}
+function renderSaved(){
+ $("savedCount").textContent=saved.length;
+ $("savedList").innerHTML=saved.length?saved.map((s,i)=>`<div class="saved"><span><b>${s.gun}</b> • ${s.brand}<br><small>${s.style} • ${s.model||"Default model"}</small></span><span><button class="btn secondary" data-load="${i}">Load</button> <button class="btn secondary" data-del="${i}">Delete</button></span></div>`).join(""):"अभी कोई setup save नहीं है।";
+ document.querySelectorAll("[data-load]").forEach(b=>b.onclick=()=>{let s=saved[+b.dataset.load];selectedGun=s.gun;$("brandSelect").value=s.brand;$("styleSelect").value=s.style;$("modelInput").value=s.model;current=s.values;renderGuns();renderValues();$("selectedInfo").textContent=`Selected: ${s.gun} • Saved setup`;showTab("setup");toast("Setup loaded");});
+ document.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{saved.splice(+b.dataset.del,1);persist();renderSaved();});
+}
+function persist(){localStorage.setItem("sx_saved",JSON.stringify(saved));}
+function showTab(t){["setup","saved","about"].forEach(x=>$(x).hidden=x!==t);document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));if(t==="saved")renderSaved();}
+brands.forEach(b=>$("brandSelect").add(new Option(b,b)));
+$("brandSelect").value="Realme";renderGuns();generate();renderSaved();$("gunCount").textContent=guns.length;
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+$("gunSearch").addEventListener("input",e=>renderGuns(e.target.value));
+["brandSelect","styleSelect","presetSelect"].forEach(id=>$(id).addEventListener("change",generate));
+$("modelInput").addEventListener("input",()=>generate());
+$("resetBtn").onclick=generate;
+$("saveBtn").onclick=()=>{saved.unshift({gun:selectedGun,brand:$("brandSelect").value,style:$("styleSelect").value,model:$("modelInput").value,values:{...current},date:new Date().toLocaleDateString()});persist();renderSaved();toast("Setup saved on this device");};
+$("copyBtn").onclick=()=>{let txt=`SENSI X ATUL | ${selectedGun}\nDevice: ${$("brandSelect").value} ${$("modelInput").value}\n`+keys.map(k=>`${k}: ${current[k]}`).join("\n");if(navigator.clipboard?.writeText)navigator.clipboard.writeText(txt).then(()=>toast("Values copied")).catch(()=>toast("Copy not available"));else toast("Clipboard not supported");};
+if("serviceWorker" in navigator && location.protocol!=="file:")navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script></body></html>
